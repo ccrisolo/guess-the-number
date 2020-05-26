@@ -4,6 +4,8 @@ import { View, Text, StyleSheet, Button, Image } from "react-native";
 import BodyText from "../components/BodyText";
 
 import Colors from "../constants/colors";
+import MainButton from '../components/MainButton';
+
 
 const GameOverScreen = (props) => {
   return (
@@ -12,6 +14,7 @@ const GameOverScreen = (props) => {
       <View style={styles.imageContainer}>
         <Image
           // source={require('../assets/success.png')}
+          fadeDuration={3000}
           source={{
             uri:
               "https://www.planetware.com/photos-large/JPN/japan-mt-fuji-and-cherry-blossoms.jpg",
@@ -55,16 +58,19 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginHorizontal: 30,
-    padding: 20
+    padding: 20,
+    marginVertical: 15,
   },
   resultText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 20
   },
   highlight: {
     color: Colors.primary,
   },
   titleText: {
       padding: 30,
+      fontSize: 20,
   },
 });
 export default GameOverScreen;
