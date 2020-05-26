@@ -1,42 +1,70 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Button, Image } from "react-native";
 
-import BodyText from '../components/BodyText';
+import BodyText from "../components/BodyText";
+
+import Colors from "../constants/colors";
+
+const GameOverScreen = (props) => {
+  return (
+    <View style={styles.screen}>
+      <BodyText style={styles.titleText}>The Game is Over</BodyText>
+      <View style={styles.imageContainer}>
+        <Image
+          // source={require('../assets/success.png')}
+          source={{
+            uri:
+              "https://www.planetware.com/photos-large/JPN/japan-mt-fuji-and-cherry-blossoms.jpg",
+          }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+      </View>
+      <View style={styles.resultContainer}>
+        <BodyText style={styles.resultText}>
+          Your phone needed{" "}
+          <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to
+          get the number{" "}
+          <Text style={styles.highlight}>{props.userNumber}</Text>
+        </BodyText>
+      </View>
+
+      <Button title="NEW GAME" onPress={props.onRestart} />
+    </View>
+  );
+};
 
 
-const GameOverScreen = props => {
-    return (
-        <View style={styles.screen}>
-            <BodyText>The Game is Over</BodyText>
-            <View style={styles.imageContainer}>
-            <Image 
-                source={require('../assets/success.png')} 
-                style={styles.image} 
-            />
-            </View>
-            <BodyText>Number of Rounds: {props.roundsNumber}</BodyText>
-            <BodyText>Number was: {props.userNumber}</BodyText>
-            <Button title="NEW GAME" onPress={props.onRestart} />
-        </View>
-    )
-}
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
-        borderColor: 'black',
-        overflow: 'hidden',
-    },
-    image: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
-    }
-})
+  screen: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  imageContainer: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    borderColor: "black",
+    overflow: "hidden",
+  },
+  image: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+  },
+  resultContainer: {
+    marginHorizontal: 30,
+    padding: 20
+  },
+  resultText: {
+    textAlign: 'center'
+  },
+  highlight: {
+    color: Colors.primary,
+  },
+  titleText: {
+      padding: 30,
+  },
+});
 export default GameOverScreen;
