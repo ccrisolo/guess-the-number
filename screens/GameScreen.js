@@ -11,6 +11,8 @@ import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import MainButton from "../components/MainButton";
 import { Ionicons } from "@expo/vector-icons";
+import { render } from "react-dom";
+import BodyText from '../components/BodyText';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -22,6 +24,14 @@ const generateRandomBetween = (min, max, exclude) => {
     return rndNum;
   }
 };
+
+const renderListItem = (value, numOfRound) => (
+  <View key={value} style={styles.listItem}>
+    <BodyText>#{numOfRound}</BodyText>
+  <BodyText>{value}</BodyText>
+</View>
+);
+
 const GameScreen = (props) => {
   const initialGuess = generateRandomBetween(1, 100, props.userChoice);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
@@ -77,13 +87,11 @@ const GameScreen = (props) => {
           <Ionicons name="md-add" size={24} color="white" />
         </MainButton>
       </Card>
-      <ScrollView>
-        {pastGuesses.map((guess) => (
-          <View key={guess}>
-            <Text>{guess}</Text>
-          </View>
-        ))}
+      <View style={styles.listItem}>
+      <ScrollView style={styles.list}>
+        {pastGuesses.map((guess, index) => renderListItem(guess, pastGuesses.length - index))}
       </ScrollView>
+      </View>
     </View>
   );
 };
@@ -103,6 +111,19 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 10,
   },
+  list: {
+    width: '80%',
+    flex: 1,
+  },
+  listItem: {
+    borderColor: '#ccc',
+    borderWidth: 1,
+    padding: 15,
+    marginVertical: 10,
+    backgroundColor: 'white',
+    flexDirection:'row',
+    justifyContent:'space-between',
+  }
 });
 
 export default GameScreen;
