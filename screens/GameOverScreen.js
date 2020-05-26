@@ -32,7 +32,7 @@ const GameOverScreen = (props) => {
         </BodyText>
       </View>
 
-      <Button title="NEW GAME" onPress={props.onRestart} />
+      <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
     </View>
   );
 };
